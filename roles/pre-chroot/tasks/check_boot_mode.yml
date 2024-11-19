@@ -1,0 +1,17 @@
+# check_boot_mode.yml
+# This task will check if the client have boot on EFI or BIOS mode
+---
+- name: Check if the client have boot on EFI or BIOS mode
+  ansible.builtin.stat:
+    path: /sys/firmware/efi/fw_platform_size
+  register: efi_mode
+
+- name: Register boot mode as EFI if file exists
+  ansible.builtin.set_fact:
+    boot_mode: "efi"
+  when: efi_mode.stat.exists
+
+- name: Register boot mode as BIOS if file doesn't exists
+  ansible.builtin.set_fact:
+    boot_mode: "bios"
+  when: not efi_mode.stat.exists

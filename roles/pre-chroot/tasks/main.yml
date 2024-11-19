@@ -1,0 +1,5 @@
+# main.yml
+# Main task of the pre-chroot role
+---
+- name: Register boot mode
+  ansible.builtin.import_tasks: check_boot_mode.yml

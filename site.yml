@@ -1,0 +1,8 @@
+# site.yml
+# Main orchestrator
+# This playbook will act as entrypoint
+---
+- name: Configure cluster on the master node
+  hosts: arch_live
+  roles:
+    - pre-chroot
